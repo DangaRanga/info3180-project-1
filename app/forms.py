@@ -7,7 +7,8 @@ from wtforms import (
     TextAreaField,
     SelectField,
     IntegerField,
-    DecimalField
+    DecimalField,
+    SubmitField
 )
 
 # Validator imports
@@ -23,6 +24,8 @@ class PropertyForm(FlaskForm):
 
     no_rooms = IntegerField('No. of Rooms', validators=[DataRequired()])
 
+    no_bathrooms = IntegerField(
+        'No. of Bathrooms', validators=[DataRequired()])
     price = DecimalField('Price', validators=[DataRequired()])
 
     property_type = SelectField('Property Type',
@@ -31,7 +34,10 @@ class PropertyForm(FlaskForm):
                                     ('apartment', 'Apartment')
                                 ])
 
+    location = StringField(validators=[DataRequired()])
     photo = FileField('Photo', validators=[
         FileRequired(),
         FileAllowed(['jpg', 'png'], 'JPG and PNG Images only!')
     ])
+
+    submit = SubmitField("Add Property")
