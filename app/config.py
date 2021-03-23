@@ -11,6 +11,10 @@ class Config(object):
     UPLOAD_FOLDER = os.path.join(EXEC_DIR, 'uploads')
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL') or 'postgresql://yourusername:yourpassword@localhost/databasename'
+
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace(
+            "postgres://", "postgresql://", 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Create the upload folder if its deleted
